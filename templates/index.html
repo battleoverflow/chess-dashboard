@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{username}}'s chess.com stats</title>
+</head>
+
+<body>
+    <div class="bg-zinc-900 py-5 h-screen">
+        <div class="mx-auto px-6 text-center lg:px-8 w-1/2">
+            <ul role="list" class="mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-6 sm:grid-cols-1 lg:mx-0 lg:max-w-none lg:grid-cols-1 lg:gap-8">
+                <li class="rounded-2xl bg-zinc-800 px-8 py-10">
+                    <img class="mx-auto h-48 w-48 rounded-full md:h-56 md:w-56 border-4 border-red-500" src="{{avatar}}" alt="">
+                    <h3 class="mt-6 text-base font-semibold leading-7 tracking-tight text-white">
+                        <a class="text-red-500" rel="noreferrer" target="_blank" href="https://www.chess.com/member/{{username}}">
+                            @{{ username }}
+                        </a><br />
+                        Highest ELO: {{ highest_elo }} <br />
+                        Lowest ELO: {{ lowest_elo }} <br />
+                    </h3>
+                    <ul class="text-left text-white">
+                        <li>
+                            Player ID: {{ player_id }}
+                        </li>
+                        <li>
+                            Last Online: {{ last_online }}
+                        </li>
+                        <li>
+                            Title: {{ title }}
+                        </li>
+                        <li>
+                            Streamer: {{ is_streamer }}
+                        </li>
+                        <li>
+                            Twitch URL: {{ twitch_url }}
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</body>
+
+</html>
