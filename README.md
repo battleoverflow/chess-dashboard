@@ -1,31 +1,41 @@
 # Chess.com Dashboard
 
-Monitor your chess.com information locally in a Flask dashboard
+View information about anyone on chess.com using this Flask web app. All you have to do is search for the username of the person you want to find in the input
 
-The design isn't too great, but it should pull some interesting information. I've only spent about an hour on this so far, but I may revisit it in the future
+You can view the published web application here: https://chess-dashboard-flask.vercel.app
+
+## Preview
+
+*Zoomed out for a better preview*
+
+<img src=".github/assets/preview.png" />
+
+The project currently contains the following information:
+
+- Username
+- Player ID
+- Link to Profile (chess.com)
+- Highest & Lowest ELO (+ percentage of growth/difference)
+- Last Online
+- Title
+- Streamer & Twitch URL
 
 ## Usage
+
+If you want to contribute to the project or just build the web app locally, I've added some instructions below
 
 Make sure you have all the proper tools installed:
 
 ```bash
-pip install flask
+pip install -r requirements.txt
 ```
 
-Now just run the following command to start the dashboard on port `localhost:5000`:
+Now just run the following command to start the dashboard on your localhost (`localhost:5000`):
 
 ```bash
 flask run
 ```
 
-### How do I change to my username?
-
-I may eventually include a form on the front end to allow users to input their usernames, but for now, it's just an environment variable to make everything easier
-
-```
-username=<YOUR_USERNAME>
-```
-
 ## Why?
 
-I recently learned that chess.com has an API and wanted to mess around with it. Feel free to open a PR if you have improvements or submit an issue if something is broken
+I recently learned that chess.com has an API and wanted to mess around with it. Feel free to open a PR if you have improvements or submit an issue if something is broken. The project still needs some improvements on the technical side, but should work in most cases

@@ -1,3 +1,9 @@
+"""
+    Author: azazelm3dj3d (https://github.com/azazelm3dj3d)
+    Project: Chess Dashboard (https://github.com/azazelm3dj3d/chess-dashboard)
+    License: BSD 2-Clause
+"""
+
 import datetime
 from flask import Flask, render_template, request
 from chessdotcom import get_player_profile, get_player_stats
@@ -12,15 +18,21 @@ def get_profile(username):
 
     response_profile = get_player_profile(username)
 
+    # Not all players will have a profile image
+    try:
+        player_avatar = response_profile.json['player']['avatar']
+    except KeyError:
+        player_avatar = "/static/img/missing_user.png"
+
     profile = {
-        "avatar": response_profile.json['player']['avatar'],
+        "avatar": player_avatar,
         "player_id": response_profile.json['player']['player_id'],
         "username": response_profile.json['player']['username'],
         "title": "N/A",
         "followers": response_profile.json['player']['followers'],
         "last_online": response_profile.json['player']['last_online'],
         "is_streamer": response_profile.json['player']['is_streamer'],
-        "twitch_url": "N/A"
+        "twitch_url": "https://www.twitch.tv"
     }
 
     if "title" in response_profile.json['player']:
@@ -60,7 +72,7 @@ def calculate_increase(elo_values):
 def index():
     username = 0
 
-    if request.method == 'POST':
+    if request.method == "POST":
         form_data = request.form
 
         for _, value in form_data.items():
@@ -71,7 +83,7 @@ def index():
 
     try:
         chess_template = render_template(
-            "index.html", # Template
+            "index.html",
             form_data=form_data,
             avatar=get_profile(username)['avatar'],
             player_id=get_profile(username)['player_id'],
@@ -81,13 +93,14 @@ def index():
             last_online=datetime.datetime.fromtimestamp(get_profile(username)['last_online']).strftime("%m/%d/%Y @ %H:%M:%S"),
             is_streamer=get_profile(username)['is_streamer'],
             twitch_url=get_profile(username)['twitch_url'],
+            twitch_url_stripped=str(get_profile(username)['twitch_url']).replace("https://twitch.tv/", ""),
             highest_elo=get_stats(username)['highest_elo'],
             lowest_elo=get_stats(username)['lowest_elo'],
             elo_increase=calculate_increase([get_stats(username)['highest_elo'], get_stats(username)['lowest_elo']])
         )
     except ChessDotComError:
         chess_template = render_template(
-            "index.html", # Template
+            "index.html",
             avatar="/static/img/missing_user.png",
             player_id="N/A",
             username="N/A",
@@ -95,7 +108,7 @@ def index():
             followers="N/A",
             last_online="N/A",
             is_streamer="N/A",
-            twitch_url="N/A",
+            twitch_url="https://www.twitch.tv",
             highest_elo="N/A",
             lowest_elo="N/A",
             elo_increase="N/A"
@@ -104,4 +117,4 @@ def index():
     return chess_template
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
