@@ -56,7 +56,7 @@ def calculate_increase(elo_values):
 
     return round(percentage, 2)
 
-@app.route("/", methods = ["POST", "GET"])
+@app.route("/", methods=["POST", "GET"])
 def index():
     username = 0
 
