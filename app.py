@@ -6,15 +6,22 @@
 
 import datetime
 from flask import Flask, render_template, request
-from chessdotcom import get_player_profile, get_player_stats
+from chessdotcom import Client, get_player_profile, get_player_stats
 from chessdotcom.types import ChessDotComError
 
 app = Flask(__name__)
 
 def get_profile(username):
     """
-    rtype dict
+    Get the profile for a specific username a structured dictionary.
+    
+    @rtype dict
     """
+
+    # As of June 2023, the Chess.com API now requires a user agent to be set in request headers
+    # Forum post: https://www.chess.com/clubs/forum/view/error-403-in-member-profile
+    # If this request header is not set, be prepared to get a 403 Forbidden response
+    Client.request_config["headers"]["User-Agent"] = ("Chess Dashboard by azazelm3dj3d (https://github.com/azazelm3dj3d)")
 
     response_profile = get_player_profile(username)
 
@@ -47,7 +54,9 @@ def get_profile(username):
 
 def get_stats(username):
     """
-    rtype dict
+    Get the stats for a specific username a structured dictionary.
+
+    @rtype dict
     """
 
     response_stats = get_player_stats(username)
@@ -60,6 +69,12 @@ def get_stats(username):
     return stats
 
 def calculate_increase(elo_values):
+    """
+    Calculate ELO increase and round to the 2nd decimal place.
+
+    @rtype int
+    """
+
     try:
         # (abs(current_elo - previous_elo) / previous_elo) * 100.0
         percentage = (abs(elo_values[0] - elo_values[1]) / elo_values[1]) * 100.0
