@@ -1,6 +1,6 @@
 """
-    Author: azazelm3dj3d (https://github.com/azazelm3dj3d)
-    Project: Chess Dashboard (https://github.com/azazelm3dj3d/chess-dashboard)
+    Author: battleoverflow (https://github.com/battleoverflow)
+    Project: Chess Dashboard (https://github.com/battleoverflow/chess-dashboard)
     License: BSD 2-Clause
 """
 
@@ -21,7 +21,7 @@ def get_profile(username):
     # As of June 2023, the Chess.com API now requires a user agent to be set in request headers
     # Forum post: https://www.chess.com/clubs/forum/view/error-403-in-member-profile
     # If this request header is not set, be prepared to get a 403 Forbidden response
-    Client.request_config["headers"]["User-Agent"] = ("Chess Dashboard by azazelm3dj3d (https://github.com/azazelm3dj3d)")
+    Client.request_config["headers"]["User-Agent"] = ("Chess Dashboard by battleoverflow (https://github.com/battleoverflow)")
 
     response_profile = get_player_profile(username)
 

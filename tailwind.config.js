@@ -1,6 +1,6 @@
 /*
-  Author: azazelm3dj3d (https://github.com/azazelm3dj3d)
-  Project: Chess Dashboard (https://github.com/azazelm3dj3d/chess-dashboard)
+  Author: battleoverflow (https://github.com/battleoverflow)
+  Project: Chess Dashboard (https://github.com/battleoverflow/chess-dashboard)
   License: BSD 2-Clause
 */
 
